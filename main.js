@@ -18,7 +18,13 @@ class MyTable extends HTMLTableElement {
 		 { p : "12", name : "Name12", q : 4 },
 		 { p : "13", name : "Name13", q : 4 },
 		 { p : "14", name : "Name14", q : 13 },
-		 { p : "15", name : "Name15", q : 13 }
+		 { p : "15", name : "Name15", q : 13 },
+		 { p : "16", name : "Name13", q : 5 },
+		 { p : "17", name : "Name14", q : 5 },
+		 { p : "18", name : "Name15", q : 5 },
+		 { p : "19", name : "Name13", q : 3 },
+		 { p : "20", name : "Name14", q : 3 },
+		 { p : "21", name : "Name15", q : 3 }
 		 
 		 ];
 
@@ -45,7 +51,8 @@ class MyTable extends HTMLTableElement {
 		
 	}
   displayTable( parent, data, table, index ){
-	  parent.appendChild(table);  
+	  parent.appendChild(table); 
+	  
 	  data.filter(s=>s.q === index).forEach(s => {
 		  const newRow = table.insertRow();
 		
@@ -55,10 +62,16 @@ class MyTable extends HTMLTableElement {
 			  let text = document.createTextNode(s[prop]);
 			  cell.appendChild(text);
 		  }
+		  
+		 
 		  newRow.cells[0].addEventListener('click', function(e){
+			  
 			  if (newRow.hasAttribute('open')){
+				 
 				  if(newRow && newRow.nextSibling) {
+					  
 					  newRow.parentNode.removeChild(newRow.nextSibling);
+					  newRow.toggleAttribute('open');
 				  }
 			  }else{
 				  const p = parseInt(e.target.innerText);
@@ -70,11 +83,12 @@ class MyTable extends HTMLTableElement {
 					  row.appendChild(cell);
 					  table.childNodes[0].insertBefore(row, newRow.nextSibling);
 					  const detailTable = document.createElement('table');
+					  newRow.toggleAttribute('open');
 					  self.displayTable( cell, data, detailTable, p ) ;
 					
 				  }   
 			  }
-			  newRow.toggleAttribute('open');
+			
 		  })  
 	   });
    }
