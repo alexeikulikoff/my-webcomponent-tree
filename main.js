@@ -28,11 +28,9 @@ class MyTable extends HTMLTableElement {
 		 
 		 ];
 
-	 const vv = self.hasChild(15, data);
-	
 	 
 	 const table = document.createElement('table');
-	 table.setAttribute('border', '1');
+	 table.classList.add("table");
 	
 	 self.displayTable(self, data, table, 0);
 	  
@@ -40,42 +38,37 @@ class MyTable extends HTMLTableElement {
   hasChild(p, data){
 	  return data.filter(s=> s.q === p ).length > 0;
   }
-  get open() {
-	  return this.getAttribute('open');
-	}
-
-  set open(isOpen) {
-	
-	   this.setAttribute('open', isOpen);
-	
-		
-	}
+ 
   displayTable( parent, data, table, index ){
 	  parent.appendChild(table); 
 	  
 	  data.filter(s=>s.q === index).forEach(s => {
 		  const newRow = table.insertRow();
-		
 		  for (var prop in s) {
 			  const cell = newRow.insertCell();
-			  cell.style.padding = '8px';
-			  let text = document.createTextNode(s[prop]);
-			  cell.appendChild(text);
+			  if (prop === 'name'){
+				  let text = document.createTextNode(s[prop]);
+				  cell.appendChild(text);
+			  }
 		  }
-		  
-		 
-		  newRow.cells[0].addEventListener('click', function(e){
-			  
+		 newRow.cells[0].setAttribute('id',s.p);
+		 const p = parseInt(s.p);
+		 if (self.hasChild(p,data)){
+			  newRow.cells[0].classList.add("details-control");  
+		 }
+		 newRow.cells[0].addEventListener('click', function(e){
 			  if (newRow.hasAttribute('open')){
-				 
+				  newRow.classList.remove("details");
 				  if(newRow && newRow.nextSibling) {
-					  
 					  newRow.parentNode.removeChild(newRow.nextSibling);
 					  newRow.toggleAttribute('open');
 				  }
 			  }else{
-				  const p = parseInt(e.target.innerText);
+				  const p = parseInt(e.target.id);
 				  if (self.hasChild(p,data)){
+					  newRow.classList.add("details");
+					  newRow.cells[0].classList.add("details-control"); 
+					  
 					  const colSpan = Object.keys(s).length;
 					  const row = document.createElement('tr');
 					  const cell = document.createElement('td');
@@ -83,6 +76,7 @@ class MyTable extends HTMLTableElement {
 					  row.appendChild(cell);
 					  table.childNodes[0].insertBefore(row, newRow.nextSibling);
 					  const detailTable = document.createElement('table');
+					  detailTable.classList.add("table");
 					  newRow.toggleAttribute('open');
 					  self.displayTable( cell, data, detailTable, p ) ;
 					
