@@ -8568,5 +8568,8 @@ td.details-control {
 tr.details td.details-control {
     background: url('details_close.png') no-repeat center center;
 }
+.inner-table{
+	margin-left : 50px;
+}
 
 

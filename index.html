@@ -26,50 +26,55 @@
 			<div class="row border-bottom"></div>
 			<div class="row wrapper border-bottom white-bg page-heading">
 				<div class="col-lg-10">
-					<h2>Один контроллер с тремя методами на три справочника</h2>
+					<h3>Редактор меню</h3>
 
 				</div>
 				<div class="ibox-tools"></div>
 			</div>
 			<div class="wrapper wrapper-content animated fadeInRight">
 				<div class="row">
-					<div class="col-lg-10">
+					<div class="col-lg-4">
 						<div class="ibox float-e-margins">
-							<div class="ibox-title">
-							</div>
 							<div class="ibox-content">
-							<form method="get" class="form-horizontal">
-								<div class="form-group">
-									<label class="col-sm-1 control-label">Группа:</label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control">
+								<form role="form">
+									<div class="form-group">
+										<label>Наименование</label> 
+										<input type="text"
+											placeholder="Наименование" class="form-control">
 									</div>
-
-									<label class="col-sm-1 control-label">Пикча:</label>
-									<div class="col-sm-2">
-										<input type="text" class="form-control">
+									<div class="form-group">
+										<label>Иконка</label> 
+										<input type="text" placeholder="Имя файла" class="form-control">
 									</div>
-
-									<label class="col-sm-1 control-label">№ п.п.</label>
-									<div class="col-sm-1">
-										<input type="text" class="form-control">
+									<div class="form-group">
+										<label>Порядок следования в группе</label>
+										
+										<input  type="text"
+											placeholder="Целое число" class="form-control">
+										
 									</div>
-
-									
-									<div class="col-sm-2">
-										<button id="button1" type="button"
-											class="btn btn-primary btn-sm">Добавить</button>
-									</div>
-								</div>
+									  <div>
+                                        <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit">Добавить  корневую группу</button>
+                                       </div> 
 								</form>
-								<my-table></my-table>
-
 							</div>
 						</div>
 					</div>
-				
+					<div class="col-lg-6">
+						<div class="ibox float-e-margins">
+
+							<div class="ibox-content">
+								<my-table></my-table>
+
+							</div>
+
+						</div>
+
+
+					</div>
+
 				</div>
-				
+
 
 			</div>
 
@@ -84,7 +89,7 @@
 	<script src="/js/jquery/jquery.min.js"></script>
 	<script src="/js/bootstrap/bootstrap.min.js"></script>
 
-	
+
 	<script src="main.js"></script>
 
 

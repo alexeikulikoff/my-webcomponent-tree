@@ -1,10 +1,29 @@
 // Create a class for the element
-customElements.define('edit-form',
+customElements.define('save-button',
   class extends HTMLElement {
     constructor() {
       super();
       
+      const button = document.createElement('button');
+      button.setAttribute('type','button');
+      button.classList.add('btn');
+      button.classList.add('btn-xs');
+      button.classList.add('btn-primary');
+      button.textContent = 'Добавить';
       
+      this.appendChild(button);
+        
+      button.addEventListener('click', e => {
+    	  console.log(this.value);
+          e.preventDefault();
+        });
+    }
+    get value() {
+      return this.getAttribute('value');
+    }
+
+    set value(newValue) {
+    	this.setAttribute('value', newValue);
     }
   }
 );
@@ -145,18 +164,24 @@ class MyTable extends HTMLTableElement {
 		  const newRow = table.insertRow();
 		  const cell_p = newRow.insertCell();
 		  const cell_name = newRow.insertCell();
-		  const cell_q = newRow.insertCell();
+		 
 		  const cell_so = newRow.insertCell();
+		  const cell_add = newRow.insertCell();
 		  const cell_del =  newRow.insertCell();
 			  
 		  cell_name.innerHTML = '<edit-word>' + s.name + '</edit-word>';
 		  cell_so.innerHTML = '<edit-word>' + s.so + '</edit-word>';
-		  cell_del.innerHTML = '<delete-button value="' + s.p + '"</delete-button>'; 
+		
+		  cell_del.innerHTML = '<delete-button value="' + s.p + '"></delete-button>'; 
 		  
+		   
 		 cell_p.setAttribute('id',s.p);
 		 const p = parseInt(s.p);
+		 
 		 if (self.hasChild(p,data)){
-			 cell_p.classList.add("details-control");  
+			 cell_p.classList.add("details-control");
+			 cell_add.innerHTML = '<save-button value="'  + s.p + '"></save-button>'; 
+			
 		 }
 		 cell_p.addEventListener('click', function(e){
 			  if (newRow.hasAttribute('open')){
@@ -171,7 +196,7 @@ class MyTable extends HTMLTableElement {
 					  newRow.classList.add("details");
 					  cell_p.classList.add("details-control"); 
 					  
-					  const colSpan = Object.keys(s).length;
+					  const colSpan = 5; //Object.keys(s).length;
 					  const row = document.createElement('tr');
 					  const cell = document.createElement('td');
 					  cell.setAttribute('colspan',colSpan);
